@@ -52,7 +52,6 @@ def train_model(config_path: Text) -> None:
     with open(config_path) as conf_file:
         config = yaml.safe_load(conf_file)
 
-    estimator_name = config['train']['estimator_name']
     train_df = pd.read_csv(config['data_split']['trainset_path'])
 
     model = train(

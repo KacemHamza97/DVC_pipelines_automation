@@ -6,16 +6,13 @@
 .DS_Store
 
 # Project
+# Project
 data/*
 models/*
 reports/*
-
 # Python
 __pycache__
 .ipynb_checkpoints
 
 # Venv
 dvc-venv
-/data
-/models
-/reports
