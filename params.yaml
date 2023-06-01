@@ -1,0 +1,34 @@
+base:
+  random_state: 42
+  log_level: INFO
+
+
+data_load:
+  dataset_csv: 'data/raw/iris.csv'
+
+
+featurize:
+  features_path: 'data/processed/featured_iris.csv'
+  target_column: target
+
+
+data_split:
+  test_size: 0.2
+  trainset_path: 'data/processed/train_iris.csv'
+  testset_path: 'data/processed/test_iris.csv'
+
+
+train:
+  n_iter: 10
+  cv: 5
+  param_grid:
+    penalty: ['l1', 'l2']
+    C: [0.01, 0.1, 1, 10]
+    solver: ['liblinear', 'saga']
+  model_path: models/model.joblib
+
+
+evaluate:
+  reports_dir: reports
+  metrics_file: 'metrics.json'
+  confusion_matrix_image: 'confusion_matrix.png'
