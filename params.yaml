@@ -1,6 +1,5 @@
 base:
   random_state: 42
-  log_level: INFO
 
 
 data_load:
@@ -19,12 +18,13 @@ data_split:
 
 
 train:
+  max_iter: 5000
   n_iter: 5
   cv: 3
   param_grid:
-    penalty: ['l1', 'l2']
-    C: [0.01, 0.1, 1, 10]
-    solver: ['liblinear', 'saga']
+    penalty: [ 'l1', 'l2' ]
+    C: [ 0.01, 0.1, 1, 10 ]
+    solver: [ 'liblinear', 'saga' ]
   model_path: models/model.joblib
 
 

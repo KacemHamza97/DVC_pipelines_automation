@@ -10,7 +10,6 @@ stages:
       params.yaml:
         base:
           random_state: 42
-          log_level: INFO
         data_load:
           dataset_csv: data/raw/iris.csv
     outs:
@@ -30,7 +29,6 @@ stages:
       params.yaml:
         base:
           random_state: 42
-          log_level: INFO
         data_load:
           dataset_csv: data/raw/iris.csv
         featurize:
@@ -53,7 +51,6 @@ stages:
       params.yaml:
         base:
           random_state: 42
-          log_level: INFO
         data_split:
           test_size: 0.2
           trainset_path: data/processed/train_iris.csv
@@ -75,16 +72,16 @@ stages:
       md5: 30206b6aeae557d49553f33bbaf20b89
       size: 5732
     - path: src/stages/train.py
-      md5: 33e85eb3e2878859f1383716edbc219f
-      size: 2118
+      md5: 88f6673868a4d2bbdcca078a59b297c1
+      size: 2196
     params:
       params.yaml:
         base:
           random_state: 42
-          log_level: INFO
         data_split.trainset_path: data/processed/train_iris.csv
         featurize.target_column: target
         train:
+          max_iter: 5000
           n_iter: 5
           cv: 3
           param_grid:
@@ -102,8 +99,8 @@ stages:
           model_path: models/model.joblib
     outs:
     - path: models/model.joblib
-      md5: 1ad2f0f90a11960d2d52137dcf54413b
-      size: 3566
+      md5: 1df1dedbc25cf230aae25231c877d953
+      size: 3598
   evaluate:
     cmd: python src/stages/evaluate.py --config=params.yaml
     deps:
@@ -111,8 +108,8 @@ stages:
       md5: 53cb44db07e5451ec6f6fbbaa489f875
       size: 1497
     - path: models/model.joblib
-      md5: 1ad2f0f90a11960d2d52137dcf54413b
-      size: 3566
+      md5: 1df1dedbc25cf230aae25231c877d953
+      size: 3598
     - path: src/stages/evaluate.py
       md5: d36a4253b4d3e6a2549a9b0812237e16
       size: 1916
@@ -120,7 +117,6 @@ stages:
       params.yaml:
         base:
           random_state: 42
-          log_level: INFO
         data_split.testset_path: data/processed/test_iris.csv
         evaluate:
           reports_dir: reports

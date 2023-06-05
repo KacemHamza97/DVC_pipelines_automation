@@ -9,7 +9,7 @@ from sklearn.metrics import f1_score, make_scorer
 from typing import Dict, Text
 
 
-def train(df: pd.DataFrame, target_column: Text, param_grid: Dict, cv: int, n_iter: int, seed: int):
+def train(df: pd.DataFrame, target_column: Text, param_grid: Dict, cv: int, max_iter: int, n_iter: int, seed: int):
     """Train model.
     Args:
         df {pandas.DataFrame}: dataset
@@ -22,7 +22,7 @@ def train(df: pd.DataFrame, target_column: Text, param_grid: Dict, cv: int, n_it
         trained model
     """
 
-    estimator = LogisticRegression()
+    estimator = LogisticRegression(max_iter=max_iter)
     f1_scorer = make_scorer(f1_score, average='weighted')
 
     # Perform randomized search cross-validation
@@ -59,6 +59,7 @@ def train_model(config_path: Text) -> None:
         target_column=config['featurize']['target_column'],
         param_grid=config['train']['param_grid'],
         cv=config['train']['cv'],
+        max_iter=config['train']['max_iter'],
         n_iter=config['train']['n_iter'],
         seed=config['base']['random_state']
     )
